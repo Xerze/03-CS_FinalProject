@@ -18,26 +18,37 @@ class Personaje {
 
 // Función que nos permite obtener los personajes dela API.
 async function obtenerPersonajes() {
+    let personajes = [];
     let url = "https://akabab.github.io/starwars-api/api/all.json";
-    let elemento = document.getElementById("app");
+    let elemento = document.getElementById("div-pjs");
 
-    // Esta invocación devuelve una promesa.
-    // Una función asíncrona donde hasta que esto no se cumpla, no se meten datos.
-    const data = await fetch(url);
-    // Cuando eso pasa, mete los personajes.
-    let personajes = await data.json();
-
-    // Creamos un nuevo objeto llamado personaje que copia los elementos de la clase Personaje.
-    let personaje = new Personaje(personajes[0].name, personajes[0].image);
+    const response = await fetch(url);
+    const data = await response.json();
 
     console.log(data);
     console.log(personajes);
 
-    // Con esto inyectamos al HTML el código para que muestre el resultado.
-    elemento.innerHTML = `
-    <p> ${personaje.obtenerNombre()}</p>
-    <img src=${personaje.obtenerImg()} height=700px>
+    for (let personaje of data) {
+        console.log(personaje);
+    }
+
+    data.forEach(datum => {
+        let nuevoPersonaje = new Personaje(datum.name, datum.image)
+        personajes.push(nuevoPersonaje);
+    });
+
+    personajes.map((personaje) => {
+        // Con esto inyectamos al HTML el código para que muestre el resultado.
+        elemento.innerHTML += `
+        <div class="card-pj">
+            <h1 class="tpj"> ${personaje.obtenerNombre()}</h1>
+            <p>
+                <img src=${personaje.obtenerImg()} height=500px>
+            </p>
+        </div>
+        
     `
+    })
 }
 
 

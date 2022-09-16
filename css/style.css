@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.busqueda {
+    margin: 30px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#div-pjs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card-pj {
+    margin: 10px;
+}
+
+.tpj {
+    text-align: center;
+    color: dimgrey;
+}
